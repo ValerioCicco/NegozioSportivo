@@ -11,11 +11,11 @@ public class Menu {
 	Scanner scannerInt = new Scanner(System.in);
 	private ShopService shopService;
 	private ProdottoService prodottoService;
-	private ClienteService clienteService;
+	ClienteService clienteService = new ClienteService();
 
 	public void menu(Cliente cliente) {
 
-		if (cliente instanceof Admin) {
+		if (cliente.getEmailCliente().equals("admin") && cliente.getUsername().equals("admin")) {
 			System.out.println("Benvenuto admin");
 			System.out.println("Scegli 1 per gestire gli utenti e 2 per gestire i prodotti");
 			int responsePanel = scannerInt.nextInt();

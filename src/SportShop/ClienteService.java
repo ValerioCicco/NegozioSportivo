@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class ClienteService {
     private List<Cliente> clienti = new ArrayList<>();
-
+    
     // Aggiungi un nuovo cliente
     public void aggiungiCliente(Cliente cliente) {
         clienti.add(cliente);
