@@ -27,6 +27,20 @@ public class Prodotto {
 		this.descrizione = descrizione;
 		this.prezzo = prezzo;
 	}
+	
+	
+
+	public Prodotto(int idProdotto, String nome, String marca, String descrizione, float prezzo, int qta,
+			boolean isPresent) {
+		super();
+		this.idProdotto = idProdotto;
+		this.nome = nome;
+		this.marca = marca;
+		this.descrizione = descrizione;
+		this.prezzo = prezzo;
+		this.qta = qta;
+		this.isPresent = isPresent;
+	}
 
 	public int getIdProdotto() {
 		return idProdotto;
@@ -84,6 +98,16 @@ public class Prodotto {
 		this.qta = quantita;
 	}
 	
+	
+	
+	public int getQta() {
+		return qta;
+	}
+
+	public void setQta(int qta) {
+		this.qta = qta;
+	}
+
 	public String toString() {
         return "Codice: " + getIdProdotto() +
                ", Nome: " + getNome() +
