@@ -13,7 +13,7 @@ import gestoreConnessioni.GestoreConnessioni;
 public class ProdottoDAO {
 	
 	public static ArrayList<Prodotto> getAllProducts(GestoreConnessioni gc, ProdottoService ps) {
-		String query = "SELECT * FROM auto";
+		String query = "SELECT * FROM prodotti";
 
 		ResultSet rs = gc.eseguiStatementQuery(query);
 
@@ -41,7 +41,7 @@ public class ProdottoDAO {
 	}
 
 	public static void insertProduct(GestoreConnessioni gc, ProdottoService ps, Prodotto prodotto) {
-		String query = ("INSERT INTO prodotto (idProdotto, nome, marca, descrizione, prezzo, isPresent, qta) "
+		String query = ("INSERT INTO prodotti (idProdotto, nome, marca, descrizione, prezzo, isPresent, qta) "
 				+ "VALUES (?, ?, ?, ?, ?, ?)");
 		try {
 			Connection conn = gc.getConn();
@@ -68,40 +68,51 @@ public class ProdottoDAO {
 
 	}
 
-//	public boolean updateProduct(GestoreConnessioni gc, Prodotto prodotto) {
-//		String query = "UPDATE prodotto SET nome = ?, marca = ?, descrizione = ?, prezzo = ?, isPresent = ?, qta = ? WHERE idProdotto = ?";
-//		PreparedStatement preparedStatement = gc.preparareStatement(query);
-//
-//		try {
-//			preparedStatement.setString(1, prodotto.getNome());
-//			preparedStatement.setString(2, prodotto.getMarca());
-//			preparedStatement.setString(3, prodotto.getDescrizione());
-//			preparedStatement.setFloat(4, prodotto.getPrezzo());
-//			preparedStatement.setBoolean(5, prodotto.isPresent());
-//			preparedStatement.setInt(6, prodotto.getQta());
-//			preparedStatement.setInt(7, prodotto.getIdProdotto());
-//
-//			int rowsAffected = preparedStatement.executeUpdate();
-//			return rowsAffected > 0;
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			return false;
-//		}
-//	}
+	public boolean updateProduct(GestoreConnessioni gc, Prodotto prodotto) throws SQLException {
+		String query = "UPDATE prodotti SET nome = ?, marca = ?, descrizione = ?, prezzo = ?, isPresent = ?, qta = ? WHERE idProdotto = ?";
+		Connection conn = gc.getConn();
+		PreparedStatement preparedStatement = conn.prepareStatement(query);
 
-//	public boolean deleteProduct(GestoreConnessioni gc, int idProdotto) {
-//		String query = "DELETE FROM prodotto WHERE idProdotto = ?";
-//		PreparedStatement preparedStatement = gc.preparareStatement(query);
-//
-//		try {
-//			preparedStatement.setInt(1, idProdotto);
-//
-//			int rowsAffected = preparedStatement.executeUpdate();
-//			return rowsAffected > 0;
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			return false;
-//		}
-//	}
+		try {
+			preparedStatement.setString(1, prodotto.getNome());
+			preparedStatement.setString(2, prodotto.getMarca());
+			preparedStatement.setString(3, prodotto.getDescrizione());
+			preparedStatement.setFloat(4, prodotto.getPrezzo());
+			preparedStatement.setBoolean(5, prodotto.isPresent());
+			preparedStatement.setInt(6, prodotto.getQta());
+			preparedStatement.setInt(7, prodotto.getIdProdotto());
+
+			int rowsAffected = preparedStatement.executeUpdate();
+			System.out.println("Modifica avvenuta con successo");
+			return rowsAffected > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+
+	public static void deleteAuto(GestoreConnessioni gc, ProdottoService ps, Prodotto prodotto) {
+		String query = ("DELETE FROM prodotti WHERE id=?");
+
+		try {
+			Connection conn = gc.getConn();
+
+			PreparedStatement prstmt = conn.prepareStatement(query);
+
+			int id = prodotto.getIdProdotto();
+
+			prstmt.setString(1, id + "");
+
+			System.out.println("Delete eseguita correttamente");
+
+			prstmt.execute();
+			
+			ps.eliminaProdotto(id);
+			
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+	}
 
 }
