@@ -7,12 +7,12 @@ public class ProdottoService {
 	private List<Prodotto> prodotti = new ArrayList<Prodotto>();
 
 	//Aggiungi nuovo prodotto
-	private void aggiungiProdotto(Prodotto prodotto) {
+	public void aggiungiProdotto(Prodotto prodotto) {
 		prodotti.add(prodotto);
 	}
 
 	//Modifica i dettagli di un prodotto
-	private void modificaProdotto(int id, String nuovoNome, String nuovaDescrizione, float nuovoPrezzo,
+	public void modificaProdotto(int id, String nuovoNome, String nuovaDescrizione, float nuovoPrezzo,
 			String nuovaMarca) {
 		for (Prodotto prodotto : prodotti) {
 			if (prodotto.getIdProdotto() == (id)) {
@@ -28,7 +28,7 @@ public class ProdottoService {
 	}
 
 	//Elimina un prodotto
-	private void eliminaProdotto(int id) {
+	public void eliminaProdotto(int id) {
 		Prodotto prodottoDaEliminare = null;
 		for (Prodotto prodotto : prodotti) {
 			if (prodotto.getIdProdotto() == id) {
