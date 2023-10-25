@@ -10,7 +10,7 @@ si troverà in allegato foto del diagramma ER cosi composto di 4 entity con rela
 
 -clienti
 -prodotti
--ordin
+-ordini
 -prodottiOrdinati
 
 Successivamente ci siamo divisi i compiti in 3 lati --> Lato java, lato DB e lato Jolly(Documentazione, aiuto codice ecc)
