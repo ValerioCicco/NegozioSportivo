@@ -10,18 +10,24 @@ public class Menu {
 	Scanner scannerLine = new Scanner(System.in);
 	Scanner scannerInt = new Scanner(System.in);
 	private ShopService shopService;
-	private ProdottoService prodottoService;
+	ProdottoService prodottoService = new ProdottoService();
 	ClienteService clienteService = new ClienteService();
-
+	boolean continua= true;
 	public void menu(Cliente cliente) {
-
+		
+		
+		
+		while(continua) {
+			
+		
 		if (cliente.getEmailCliente().equals("admin") && cliente.getUsername().equals("admin")) {
 			System.out.println("Benvenuto admin");
 			System.out.println("Scegli 1 per gestire gli utenti e 2 per gestire i prodotti");
 			int responsePanel = scannerInt.nextInt();
 
 			switch (responsePanel) {
-
+			
+			
 			case 1:
 				clienti();
 				break;
@@ -63,6 +69,8 @@ public class Menu {
 			}
 		}
 
+	}
+		
 	}
 
 	public void clienti() {
