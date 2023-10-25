@@ -27,7 +27,6 @@ public class Prodotto {
 		this.marca = marca;
 		this.descrizione = descrizione;
 		this.prezzo = prezzo;
-		this.isPresent = isPresent;
 	}
 
 	public int getIdProdotto() {
@@ -85,5 +84,14 @@ public class Prodotto {
 	public void setQuantita(int quantita) {
 		this.qta = quantita;
 	}
+	
+	public String toString() {
+        return "Codice: " + getIdProdotto() +
+               ", Nome: " + getNome() +
+               ", Descrizione: " + getDescrizione() +
+               ", Prezzo: " + getPrezzo() +
+               ", Marca: " + getMarca() +
+               ", Quantità: " + getQuantita();
+    }
 	
 }

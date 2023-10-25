@@ -7,7 +7,7 @@ public class Admin extends Cliente{
 		// TODO Auto-generated constructor stub
 	}
 	
-	//public Admin() {
-		//super();
-	//}
+//	public Admin() {
+//		super();
+//	}
 }
