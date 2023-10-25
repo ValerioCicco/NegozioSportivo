@@ -66,6 +66,13 @@ public class Cliente {
 	public void setIndirizzo(String indirizzo) {
 		this.indirizzo = indirizzo;
 	}
+	
+	public String toString() {
+        return "Username: " + getUsername() +
+               ", Nome: " + getNome() +
+               ", Cognome: " + getCognome() +
+               ", Email: " + getEmailCliente();
+    }
 
 	
 }	

@@ -37,6 +37,7 @@ public class Carrello {
 		if (prodottoDaModificare != null) {
 			if (prodotto.getQuantita() > qta) {
 				prodottoDaModificare.setQuantita(qta);
+				System.out.println("Quantita` modificare correttamente:" + prodotto.getNome() + " Quantita: " + prodotto.getQuantita());
 			} else {
 				System.out.println("Quantita non disponibile");
 			}

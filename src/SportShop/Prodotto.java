@@ -17,7 +17,6 @@ public class Prodotto {
 		this.marca = marca;
 		this.descrizione = descrizione;
 		this.prezzo = prezzo;
-		this.isPresent = isPresent;
 	}
 	
 	public Prodotto(int idProdotto, String nome, String marca, String descrizione, float prezzo, int qta) {

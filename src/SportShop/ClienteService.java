@@ -47,4 +47,20 @@ public class ClienteService {
     public List<Cliente> getListaClienti() {
         return clienti;
     }
+    
+    public Cliente getCliente(String email) {
+    	for (Cliente cliente : clienti) {
+            if (cliente.getEmailCliente().equals(email)) {
+            	return cliente;
+            }
+    	}
+    	return null;
+    }
+    
+    // Metodo per visualizzare i dettagli di tutti i clienti
+    public void getDettagliClienti() {
+        for (Cliente cliente : clienti) {
+            System.out.println(cliente.toString());
+        }
+    }
 }
