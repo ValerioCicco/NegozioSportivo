@@ -11,6 +11,7 @@ import SportShop.ProdottoService;
 import gestoreConnessioni.GestoreConnessioni;
 
 public class ProdottoDAO {
+	
 	public static ArrayList<Prodotto> getAllProducts(GestoreConnessioni gc, ProdottoService ps) {
 		String query = "SELECT * FROM auto";
 
