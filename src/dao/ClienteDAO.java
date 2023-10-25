@@ -1,5 +1,7 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -36,6 +38,34 @@ public class ClienteDAO {
 		}
 
 		return clienti;
+
+	}
+	
+	
+	public static void addClient(GestoreConnessioni gc, ClienteService cs, Cliente cliente) {
+		String query = ("INSERT INTO clienti (emailCliente, username, password, nome, cognome, indirizzo) "
+				+ "VALUES (?, ?, ?, ?, ?, ?)");
+		try {
+			Connection conn = gc.getConn();
+
+			PreparedStatement prstmt = conn.prepareStatement(query);
+
+			prstmt.setString(1, cliente.getEmailCliente());
+			prstmt.setString(2, cliente.getUsername());
+			prstmt.setString(3, cliente.getPassword());
+			prstmt.setString(4, cliente.getNome());
+			prstmt.setString(5, cliente.getCognome());
+			prstmt.setString(6, cliente.getIndirizzo());
+
+			prstmt.execute();
+
+			System.out.println("insert eseguito correttamente");
+
+			cs.aggiungiCliente(cliente);
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
 
 	}
 	
