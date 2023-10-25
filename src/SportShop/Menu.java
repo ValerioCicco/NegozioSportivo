@@ -9,68 +9,67 @@ public class Menu {
 
 	Scanner scannerLine = new Scanner(System.in);
 	Scanner scannerInt = new Scanner(System.in);
-	private ShopService shopService;
+	Carrello carrello = new Carrello();
+	ShopService shopService = new ShopService(carrello);
 	ProdottoService prodottoService = new ProdottoService();
 	ClienteService clienteService = new ClienteService();
-	boolean continua= true;
+	
+	boolean continua = true;
+
 	public void menu(Cliente cliente) {
-		
-		
-		
-		while(continua) {
-			
-		
-		if (cliente.getEmailCliente().equals("admin") && cliente.getUsername().equals("admin")) {
-			System.out.println("Benvenuto admin");
-			System.out.println("Scegli 1 per gestire gli utenti e 2 per gestire i prodotti");
-			int responsePanel = scannerInt.nextInt();
 
-			switch (responsePanel) {
-			
-			
-			case 1:
-				clienti();
-				break;
+		while (continua) {
 
-			case 2:
-				prodotti();
-				break;
+			if (cliente.getEmailCliente().equals("admin") && cliente.getUsername().equals("admin")) {
+				System.out.println("Benvenuto admin");
+				System.out.println("Scegli 1 per gestire gli utenti e 2 per gestire i prodotti");
+				int responsePanel = scannerInt.nextInt();
 
+				switch (responsePanel) {
+
+				case 1:
+					clienti();
+					break;
+
+				case 2:
+					prodotti();
+					break;
+
+				}
+			} else {
+				System.out.println("Benvenuto cliente" + cliente.getNome());
+				System.out.println(
+						"Premi 1 per vedere il catalogo, 2 per aggiungere al carrello, 3 per eliminare un articolo dal carrello,"
+								+ "  4 per modificare le quantita` nel carrello, 5 per visualizzare il carrello");
+				int responseCarrello = scannerInt.nextInt();
+
+				switch (responseCarrello) {
+
+				case 1:
+					// DAO VISUALIZZA CARRELLO
+					prodottoService.getDettagliProdotti();
+					break;
+				case 2:
+					// DAO AGGIUNTA CARRELLO
+					aggiungiAlCarrello(scannerInt);
+					break;
+				case 3:
+					// DAO MODIFICA CARRELLO
+					eliminaCarrello(scannerInt);
+					break;
+				case 4:
+					// DAO MODIFICA CARRELLO
+					modificaCarrello(scannerInt);
+					break;
+				case 5:
+					// DAO MODIFICA CARRELLO
+					shopService.getDettagliCarrello();
+					break;
+				}
 			}
-		} else {
-			System.out.println("Benvenuto cliente" + cliente.getNome());
-			System.out.println(
-					"Premi 1 per vedere il catalogo, 2 per aggiungere al carrello, 3 per eliminare un articolo dal carrello,"
-							+ "  4 per modificare le quantita` nel carrello, 5 per visualizzare il carrello");
-			int responseCarrello = scannerInt.nextInt();
 
-			switch (responseCarrello) {
-
-			case 1:
-				// DAO VISUALIZZA CARRELLO
-				prodottoService.getDettagliProdotti();
-				break;
-			case 2:
-				// DAO AGGIUNTA CARRELLO
-				aggiungiAlCarrello(scannerInt);
-				break;
-			case 3:
-				// DAO MODIFICA CARRELLO
-				eliminaCarrello(scannerInt);
-				break;
-			case 4:
-				// DAO MODIFICA CARRELLO
-				modificaCarrello(scannerInt);
-				break;
-			case 5:
-				// DAO MODIFICA CARRELLO
-				shopService.getDettagliCarrello();
-				break;
-			}
 		}
 
-	}
-		
 	}
 
 	public void clienti() {
@@ -118,45 +117,44 @@ public class Menu {
 		}
 	}
 
-	
 	public void modificaProdotto(Scanner scanner1, Scanner scanner2) {
 		System.out.println("Inserisci codice prodotto da modificare");
-		int id  = scanner1.nextInt();
+		int id = scanner1.nextInt();
 		System.out.println("Inserisci nuovo nome");
-		String nuovoNome = scanner2.nextLine(); 
+		String nuovoNome = scanner2.nextLine();
 		System.out.println("Inserisci nuova descrizione");
-		String nuovaDescrizione = scanner2.nextLine(); 
+		String nuovaDescrizione = scanner2.nextLine();
 		System.out.println("Inserisci nuovo prezzo");
 		float nuovoPrezzo = scanner1.nextFloat();
 		System.out.println("Inserisci nuova marca");
 		String nuovaMarca = scanner2.nextLine();
 		prodottoService.modificaProdotto(id, nuovoNome, nuovaDescrizione, nuovoPrezzo, nuovaMarca);
 	}
-	
+
 	public void aggiungiProdotto(Scanner scanner1, Scanner scanner2) {
 		System.out.println("Inserisci codice prodotto");
 		int idProdotto = scanner1.nextInt();
 		System.out.println("Inserisci nome prodotto");
 		String nome = scanner2.nextLine();
 		System.out.println("Inserisci marca prodotto");
-		String marca = scanner2.nextLine(); 
+		String marca = scanner2.nextLine();
 		System.out.println("Inserisci descrizione prodotto");
-		String descrizione = scanner2.nextLine(); 
+		String descrizione = scanner2.nextLine();
 		System.out.println("Inserisci prezzo prodotto");
-		float prezzo = scanner1.nextFloat(); 
+		float prezzo = scanner1.nextFloat();
 		System.out.println("Inserisci quantita prodotto");
 		int qta = scanner1.nextInt();
-		
-		Prodotto prodotto = new Prodotto(idProdotto,nome,marca,descrizione,prezzo,qta);
+
+		Prodotto prodotto = new Prodotto(idProdotto, nome, marca, descrizione, prezzo, qta);
 		prodottoService.aggiungiProdotto(prodotto);
 	}
-	
+
 	public void eliminaProdotto(Scanner scanner) {
 		prodottoService.getDettagliProdotti();
-		
+
 		System.out.println("Inserisci codice prodotto da eliminare");
 		int idProdotto = scanner.nextInt();
-		
+
 		Prodotto prodotto = prodottoService.getProdotto(idProdotto);
 		if (prodotto != null) {
 			prodottoService.eliminaProdotto(idProdotto);
@@ -164,7 +162,7 @@ public class Menu {
 			System.out.println("Codice prodotto non trovato");
 		}
 	}
-	
+
 	public void aggiungiCliente(Scanner scanner) {
 		System.out.println("Inserisci email cliente");
 		String emailCliente = scanner.nextLine();
@@ -199,10 +197,10 @@ public class Menu {
 	public void eliminaCliente(Scanner scanner) {
 		System.out.println("Inserisci email cliente da eliminare");
 		String email = scanner.nextLine();
-		
+
 		Cliente cliente = clienteService.getCliente(email);
 	}
-	
+
 	public void aggiungiAlCarrello(Scanner scanner) {
 		prodottoService.getDettagliProdotti();
 
